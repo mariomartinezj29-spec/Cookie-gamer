@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#21064f"><title>Cookie Gamer</title>
+<style>
+:root{--bg:#10052b;--panel:#251052;--pink:#ff42c8;--gold:#ffd45a;--text:#fff8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#6822a8 0,#1b0840 45%,#09051b 100%);color:var(--text);font-family:system-ui,-apple-system,Arial,sans-serif;min-height:100vh}
+header{position:sticky;top:0;z-index:5;padding:12px 14px;background:#170735ed;backdrop-filter:blur(12px);border-bottom:2px solid #9e46ff;box-shadow:0 5px 25px #0007}
+.top{display:flex;align-items:center;justify-content:space-between;gap:8px;max-width:1100px;margin:auto}.brand{font-size:clamp(21px,4vw,34px);font-weight:1000;color:#ffdf65;text-shadow:2px 3px #a52c20,0 0 15px #ff4dd2}.currencies{display:flex;gap:8px;font-weight:800}.pill{background:#38176c;border:1px solid #a66cff;border-radius:20px;padding:7px 11px;white-space:nowrap}
+main{max-width:1100px;margin:auto;padding:16px}.hero{text-align:center;padding:14px 8px 18px}.hero h1{margin:0;font-size:clamp(24px,5vw,40px);text-shadow:0 0 16px #ff3fc8}.hero p{margin:6px 0;color:#e4cfff}
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 16px}.stat{background:#2a1158;border:1px solid #7445c1;border-radius:14px;padding:8px 12px;font-size:13px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar input,.toolbar select{min-width:0;flex:1;background:#1c0b3c;color:white;border:1px solid #8752ce;border-radius:12px;padding:12px;font-size:15px}
+.section{margin:20px 0}.section-title{display:flex;align-items:center;gap:9px;margin:0 0 10px;font-size:21px}.section-title span{font-size:13px;color:#d9bfff;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
+.card{position:relative;overflow:hidden;border-radius:17px;background:linear-gradient(145deg,#4b2385,#1c0b3a);border:2px solid var(--rarity);padding:10px 8px;text-align:center;min-height:174px;box-shadow:0 5px 14px #0005}
+.avatar{height:92px;width:92px;margin:0 auto 7px;border-radius:28px 28px 22px 22px;display:grid;place-items:center;font-size:49px;background:radial-gradient(circle at 35% 25%,var(--c1),var(--c2));box-shadow:inset 0 0 0 3px #ffffff40,0 4px 12px #0008;position:relative}
+.avatar:after{content:"";position:absolute;bottom:16px;left:26px;width:40px;height:12px;border-radius:50%;background:#32102c;opacity:.75}
+.card h3{font-size:14px;margin:3px 0 5px;line-height:1.2}.tag{font-size:10px;color:#e7d4ff;text-transform:uppercase;letter-spacing:.5px}.status{font-size:11px;color:#ffe18a;margin-top:5px}
+button{border:0;border-radius:12px;padding:10px 12px;background:linear-gradient(135deg,#ff56cb,#9b4dff);color:white;font-weight:850;font-size:14px;cursor:pointer;box-shadow:0 3px 0 #63228c}button:active{transform:translateY(2px);box-shadow:none}button.secondary{background:#492477;border:1px solid #a56bea;box-shadow:none}button:disabled{opacity:.55}
+.card button{width:100%;margin-top:7px;padding:8px;font-size:12px}
+.overlay{position:fixed;inset:0;background:#080314d9;z-index:10;display:none;align-items:center;justify-content:center;padding:16px}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:linear-gradient(150deg,#35136a,#16072f);border:2px solid #c05cff;border-radius:22px;padding:18px;box-shadow:0 0 40px #b13cff66}.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.modal h2{margin:0}.big-avatar{font-size:76px;text-align:center;margin:12px auto;height:120px;width:120px;border-radius:35px;display:grid;place-items:center;background:radial-gradient(circle,var(--c1),var(--c2));border:3px solid #ffffff66}
+.skin-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.skin{background:#1d0b3d;border:1px solid #8052b8;border-radius:14px;padding:9px 5px;text-align:center;font-size:12px}.skin .swatch{height:42px;width:42px;border-radius:14px;margin:0 auto 6px;background:linear-gradient(135deg,var(--c1),var(--c2));border:2px solid #fff7}.skin button{font-size:11px;padding:8px 4px;width:100%;margin-top:7px}
+.footer{text-align:center;color:#c9a8f0;font-size:12px;padding:25px 8px}.empty{text-align:center;color:#d8b9ff;padding:28px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.card{min-height:195px}.avatar{height:105px;width:105px}}
+</style></head>
+<body>
+<header><div class="top"><div class="brand">🍪 COOKIE GAMER</div><div class="currencies"><div class="pill">🪙 <b id="coins">5000</b></div><div class="pill">💎 <b id="gems">100</b></div></div></div></header>
+<main><div class="hero"><h1>✨ Tus galletas ✨</h1><p>¡Colecciónalas, desbloquéalas y crea tu equipo!</p><div class="stats"><div class="stat">🍪 <b id="unlocked">1</b>/48 desbloqueadas</div><div class="stat">🎨 <b id="skins">1</b>/144 skins</div><div class="stat">⭐ <b id="equipped">1</b> equipadas</div></div></div>
+<div class="toolbar"><input id="search" placeholder="🔎 Buscar galleta..." aria-label="Buscar galleta"><select id="filter"><option value="Todas" selected>Todas las rarezas</option><option>Supremas</option><option>Legendarias</option><option>Misteriosas</option><option>Adorables</option><option>Poderosas</option><option>Nombres rarísimos</option><option value="Desbloqueadas">Solo desbloqueadas</option><option value="Bloqueadas">Solo bloqueadas</option></select><button class="secondary" id="daily">🎁 Regalo diario</button></div>
+<div id="collection"></div><div class="footer">Cookie Gamer · Tu colección se guarda en este dispositivo 💜</div></main>
+<div class="overlay" id="overlay"><div class="modal"><div class="modal-head"><h2 id="modalTitle">Galleta</h2><button class="secondary" id="close">✕</button></div><div class="big-avatar" id="bigAvatar">🍪</div><p id="modalInfo" style="text-align:center;color:#e7d5ff"></p><h3>🎨 Aspectos</h3><div class="skin-list" id="skinList"></div></div></div>
+<script>
+const cookies=[{"rarity": "Supremas", "name": "Esperanza Eterna", "id": "0"}, {"rarity": "Supremas", "name": "Vacío Celestial", "id": "1"}, {"rarity": "Supremas", "name": "Caos Absoluto", "id": "2"}, {"rarity": "Supremas", "name": "Eternidad", "id": "3"}, {"rarity": "Supremas", "name": "Último Deseo", "id": "4"}, {"rarity": "Supremas", "name": "Luz Primordial", "id": "5"}, {"rarity": "Supremas", "name": "Tiempo Roto", "id": "6"}, {"rarity": "Supremas", "name": "Destino Infinito", "id": "7"}, {"rarity": "Legendarias", "name": "Nebulosa", "id": "8"}, {"rarity": "Legendarias", "name": "Eclipse Carmesí", "id": "9"}, {"rarity": "Legendarias", "name": "Aurora Boreal", "id": "10"}, {"rarity": "Legendarias", "name": "Cristal Lunar", "id": "11"}, {"rarity": "Legendarias", "name": "Estrella Fugaz", "id": "12"}, {"rarity": "Legendarias", "name": "Tormenta Astral", "id": "13"}, {"rarity": "Legendarias", "name": "Océano Profundo", "id": "14"}, {"rarity": "Legendarias", "name": "Sol de Medianoche", "id": "15"}, {"rarity": "Misteriosas", "name": "Séptima Llave", "id": "16"}, {"rarity": "Misteriosas", "name": "Espejo Hueco", "id": "17"}, {"rarity": "Misteriosas", "name": "Susurro Carmesí", "id": "18"}, {"rarity": "Misteriosas", "name": "Máscara Rota", "id": "19"}, {"rarity": "Misteriosas", "name": "Jardín Olvidado", "id": "20"}, {"rarity": "Misteriosas", "name": "Mil Secretos", "id": "21"}, {"rarity": "Misteriosas", "name": "Penumbra", "id": "22"}, {"rarity": "Misteriosas", "name": "Silencio Eterno", "id": "23"}, {"rarity": "Adorables", "name": "Algodón de Fresa", "id": "24"}, {"rarity": "Adorables", "name": "Nube de Vainilla", "id": "25"}, {"rarity": "Adorables", "name": "Osito de Miel", "id": "26"}, {"rarity": "Adorables", "name": "Chispita Arcoíris", "id": "27"}, {"rarity": "Adorables", "name": "Flor de Melocotón", "id": "28"}, {"rarity": "Adorables", "name": "Bombón de Luna", "id": "29"}, {"rarity": "Adorables", "name": "Corazón de Azúcar", "id": "30"}, {"rarity": "Adorables", "name": "Gatito de Mora", "id": "31"}, {"rarity": "Poderosas", "name": "Sangre de Dragón", "id": "32"}, {"rarity": "Poderosas", "name": "Furia Volcánica", "id": "33"}, {"rarity": "Poderosas", "name": "Espada del Alba", "id": "34"}, {"rarity": "Poderosas", "name": "Trueno Carmesí", "id": "35"}, {"rarity": "Poderosas", "name": "Reina del Abismo", "id": "36"}, {"rarity": "Poderosas", "name": "Emperador de Ceniza", "id": "37"}, {"rarity": "Poderosas", "name": "Llama Inmortal", "id": "38"}, {"rarity": "Poderosas", "name": "Destructor Estelar", "id": "39"}, {"rarity": "Nombres rarísimos", "name": "Xytherion", "id": "40"}, {"rarity": "Nombres rarísimos", "name": "Zhaelyx", "id": "41"}, {"rarity": "Nombres rarísimos", "name": "Ommnivar", "id": "42"}, {"rarity": "Nombres rarísimos", "name": "Vyrkhalia", "id": "43"}, {"rarity": "Nombres rarísimos", "name": "Qüenoth", "id": "44"}, {"rarity": "Nombres rarísimos", "name": "Azhuriel", "id": "45"}, {"rarity": "Nombres rarísimos", "name": "Noxthera", "id": "46"}, {"rarity": "Nombres rarísimos", "name": "Eryndrax", "id": "47"}];
+const palettes=[
+ {name:"Original",c1:"#ffd36a",c2:"#a94d2c",cost:0,emoji:"🍪"},
+ {name:"Neón galáctico",c1:"#65f4ff",c2:"#803dff",cost:300,emoji:"🌌"},
+ {name:"Halloween",c1:"#ff9b35",c2:"#64218e",cost:500,emoji:"🎃"}
+];
+const rarityColors={"Supremas":"#ffbd43","Legendarias":"#53a7ff","Misteriosas":"#b36cff","Adorables":"#ff63b9","Poderosas":"#ff514d","Nombres rarísimos":"#7665ff"};
+let state=JSON.parse(localStorage.getItem("cg_save_v1")||"null")||{coins:5000,gems:100,owned:{0:true},skins:{"0":[true,false,false]},equipped:{}};
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem("cg_save_v1",JSON.stringify(state));updateStats();render()}
+function updateStats(){
+ $("coins").textContent=state.coins.toLocaleString("es-ES");$("gems").textContent=state.gems;
+ $("unlocked").textContent=Object.keys(state.owned).filter(k=>state.owned[k]).length;
+ let n=0,e=0;cookies.forEach(c=>{let a=state.skins[c.id]||[!!state.owned[c.id],false,false];n+=a.filter(Boolean).length;if(state.owned[c.id])e++});
+ $("skins").textContent=n;$("equipped").textContent=e;
+}
+function card(c){
+ const unlocked=!!state.owned[c.id], skin=(state.equipped[c.id]||0),p=palettes[skin];
+ return `<article class="card" style="--rarity:${rarityColors[c.rarity]};--c1:${p.c1};--c2:${p.c2}">
+ <div class="tag">${c.rarity}</div><div class="avatar">${p.emoji}</div><h3>${c.name}</h3>
+ <div class="status">${unlocked?"⭐ Desbloqueada":"🔒 Bloqueada"} ${unlocked?"· "+p.name:""}</div>
+ <button onclick="openCookie(${c.id})">${unlocked?"Ver skins":"Desbloquear · 250 🪙"}</button></article>`;
+}
+function render(){
+ let q=$("search").value.toLocaleLowerCase("es"),f=$("filter").value,html="";
+ const groups=[...new Set(cookies.map(c=>c.rarity))];
+ groups.forEach(g=>{
+  if(f!=="Todas"&&f!==g)return;
+  let items=cookies.filter(c=>c.rarity===g&&c.name.toLocaleLowerCase("es").includes(q));
+  if(f==="Desbloqueadas")items=items.filter(c=>state.owned[c.id]);
+  if(f==="Bloqueadas")items=items.filter(c=>!state.owned[c.id]);
+  if(!items.length)return;
+  html+=`<section class="section"><h2 class="section-title">⭐ ${g} <span>${items.length} galletas</span></h2><div class="grid">${items.map(card).join("")}</div></section>`;
+ });
+ $("collection").innerHTML=html||'<div class="empty">No se han encontrado galletas 🍪</div>';
+ updateStats();
+}
+window.openCookie=function(id){
+ const c=cookies.find(x=>x.id===id);if(!c)return;
+ if(!state.owned[id]){
+  if(state.coins<250){alert("No tienes monedas suficientes.");return}
+  if(!confirm("¿Desbloquear "+c.name+" por 250 monedas?"))return;
+  state.coins-=250;state.owned[id]=true;state.skins[id]=[true,false,false];save();
+ }
+ $("modalTitle").textContent=c.name;$("modalInfo").textContent=c.rarity+" · Elige, compra o equipa un aspecto.";
+ $("bigAvatar").textContent=palettes[state.equipped[id]||0].emoji;
+ $("bigAvatar").style.setProperty("--c1",palettes[state.equipped[id]||0].c1);$("bigAvatar").style.setProperty("--c2",palettes[state.equipped[id]||0].c2);
+ $("skinList").innerHTML=palettes.map((p,i)=>{
+  let owned=(state.skins[id]||[true,false,false])[i],eq=(state.equipped[id]||0)===i;
+  return `<div class="skin"><div class="swatch" style="--c1:${p.c1};--c2:${p.c2}"></div><b>${p.name}</b><br>${i===2?"🎃 Especial":i===1?"✨ Especial":"🍪 Clásica"}<button onclick="skinAction(${id},${i})">${eq?"✓ Equipada":owned?"Equipar":"Comprar · "+p.cost+" 🪙"}</button></div>`;
+ }).join("");
+ $("overlay").style.display="flex";
+};
+window.skinAction=function(id,i){
+ if(!state.owned[id])return;
+ state.skins[id]=state.skins[id]||[true,false,false];
+ if(!state.skins[id][i]){
+  if(state.coins<palettes[i].cost){alert("No tienes monedas suficientes.");return}
+  state.coins-=palettes[i].cost;state.skins[id][i]=true;
+ }
+ state.equipped[id]=i;save();openCookie(id);
+};
+$("close").onclick=()=>{$("overlay").style.display="none"};
+$("overlay").addEventListener("click",e=>{if(e.target===$("overlay"))$("overlay").style.display="none"});
+$("search").addEventListener("input",render);$("filter").addEventListener("change",render);
+$("daily").onclick=()=>{
+ const today=new Date().toISOString().slice(0,10);
+ if(localStorage.getItem("cg_daily")===today){alert("¡Ya has recogido tu regalo de hoy! Vuelve mañana.");return}
+ state.coins+=750;state.gems+=5;localStorage.setItem("cg_daily",today);save();alert("¡Regalo conseguido! +750 monedas y +5 diamantes 🎁");
+};
+render();
+</script></body></html>
